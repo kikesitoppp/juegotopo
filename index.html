@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¡Dale al topo!</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #ff1493;
+    }
+    .game {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      grid-gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .hole {
+      width: 120px;
+      height: 120px;
+      background-color: #deb887;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .mole {
+      width: 100px;
+      height: 100px;
+      background-image: url('https://i.imgur.com/fZQGjKX.png'); /* Imagen de topo */
+      background-size: cover;
+      position: absolute;
+      bottom: -100px;
+      left: 10px;
+      transition: bottom 0.3s;
+    }
+    .mole.show {
+      bottom: 10px;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #8b0000;
+    }
+    .end-message {
+      font-size: 24px;
+      color: #ff4500;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>¡Dale al topo!</h1>
+<div class="game" id="game">
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+</div>
+
+<div class="message" id="message"></div>
+<div class="end-message" id="endMessage"></div>
+
+<script>
+  const holes = document.querySelectorAll('.hole');
+  const messages = [
+    "¡Dele amorrrrrr!",
+    "¡Va bien mi vidaaa!",
+    "¡Dele con fuerzaaaa!",
+    "¡la capibayaaaa!",
+    "¡Buen trabajo amorcitoooo!",
+    "¡Falta faltaaaa!",
+    "¡Ya casi acaba chiquita!",
+    "¡deleee unito más mi reinotaaa!",
+    "¡Ya merito amor!",
+    "¡Lo hizo perfecto mi amor, suerte con su tesisssss, te amuuuuu <3!"
+  ];
+
+  let shown = 0;
+  let hits = 0;
+
+  function showMole() {
+    if (shown >= 10) {
+      document.getElementById("endMessage").textContent = "¡Juego terminado! Topos golpeados: " + hits;
+      return;
+    }
+
+    const index = Math.floor(Math.random() * holes.length);
+    const mole = holes[index].querySelector('.mole');
+
+    mole.classList.add('show');
+    mole.onclick = () => {
+      mole.classList.remove('show');
+      document.getElementById("message").textContent = messages[hits];
+      hits++;
+      mole.onclick = null;
+    };
+
+    shown++;
+    setTimeout(() => {
+      mole.classList.remove('show');
+      mole.onclick = null;
+      setTimeout(showMole, 800);
+    }, 1000);
+  }
+
+  showMole();
+</script>
+
+</body>
+</html>
