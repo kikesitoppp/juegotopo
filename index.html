@@ -20,8 +20,9 @@
       grid-template-columns: repeat(3, 120px);
       grid-gap: 20px;
       justify-content: center;
-      margin-top: 40px;
+      margin: 40px auto 0;
       display: none;
+      max-width: 500px;
     }
     .hole {
       width: 120px;
@@ -49,11 +50,17 @@
       margin-top: 30px;
       font-size: 20px;
       color: #8b0000;
+      padding: 0 20px;
     }
     .end-message {
       font-size: 24px;
       color: #ff4500;
       margin-top: 20px;
+      padding: 0 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      white-space: pre-wrap;
     }
     #countdown-screen {
       margin-top: 100px;
@@ -69,6 +76,13 @@
 <div id="countdown-screen">El juego está por comenzar en 5...</div>
 
 <div class="game" id="game">
+  <!-- 12 hoyos -->
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
   <div class="hole"><div class="mole"></div></div>
   <div class="hole"><div class="mole"></div></div>
   <div class="hole"><div class="mole"></div></div>
@@ -92,7 +106,7 @@
     "¡Ya casi acaba chiquita!",
     "¡deleee unito máss!",
     "¡Ya merito amor ya meritooo!",
-    "¡Lo hizo perfecto mi amor se ganó un besito y un rapidito <3, por el momento suerte con su tesisssss amor y recuerde que usted puede con todo, te amuuuuu <3!"
+    "¡Lo hizo perfecto mi amor, se ganó un besito y un rapidito <3!\n\nPor el momento, suerte con su tesisssss amor y recuerde que usted puede con todo, te amuuuuu <3!"
   ];
 
   let shown = 0;
@@ -100,7 +114,7 @@
 
   function showMole() {
     if (shown >= 10) {
-      document.getElementById("endMessage").textContent = "¡Juego terminado! Topos golpeados: " + hits;
+      document.getElementById("endMessage").textContent = "¡Juego terminado! Topos golpeados: " + hits + "\n\n" + messages[9];
       return;
     }
 
@@ -123,7 +137,7 @@
     }, 1000);
   }
 
-  // Cuenta regresiva de 5 segundos
+  // Cuenta regresiva
   let countdown = 5;
   const countdownEl = document.getElementById("countdown-screen");
   const gameEl = document.getElementById("game");
